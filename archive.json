@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2021-10-17T01:07:17.698197+00:00",
+  "timestamp": "2021-11-07T01:07:38.201231+00:00",
   "repo": "ietf-wg-masque/draft-ietf-masque-connect-udp",
   "labels": [
     {
@@ -2600,15 +2600,15 @@
       "id": "MDU6SXNzdWU5OTUwOTQ2ODE=",
       "title": "Masque TCP with Extended CONNECT:  connect-tcp / masque-tcp",
       "url": "https://github.com/ietf-wg-masque/draft-ietf-masque-connect-udp/issues/55",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "enygren",
       "authorAssociation": "NONE",
       "assignees": [],
       "labels": [],
       "body": "With the switch to use Extended CONNECT in #54 for UDP, it seems logical to shift TCP to also use the same model.   Two approaches would either be for a new draft (draft-ietf-masque-connect-tcp?), or to generalize the connect-udp draft since there is lots in-common given how things are now factored.",
       "createdAt": "2021-09-13T16:32:13Z",
-      "updatedAt": "2021-10-04T20:35:54Z",
-      "closedAt": null,
+      "updatedAt": "2021-11-05T01:05:47Z",
+      "closedAt": "2021-11-05T01:05:47Z",
       "comments": [
         {
           "author": "DavidSchinazi",
@@ -2637,6 +2637,13 @@
           "body": "Yeah, this should probably be a separate draft, but defining connect-tcp would be nice to make things more parallel.",
           "createdAt": "2021-10-04T20:35:54Z",
           "updatedAt": "2021-10-04T20:35:54Z"
+        },
+        {
+          "author": "DavidSchinazi",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Closing this issue since we'll want to do this in a separate draft",
+          "createdAt": "2021-11-05T01:05:47Z",
+          "updatedAt": "2021-11-05T01:05:47Z"
         }
       ]
     },
@@ -2750,6 +2757,22 @@
           "updatedAt": "2021-10-14T18:10:04Z"
         }
       ]
+    },
+    {
+      "number": 65,
+      "id": "I_kwDOETZKbc4-Tvvt",
+      "title": "URI template or HTTP headers?",
+      "url": "https://github.com/ietf-wg-masque/draft-ietf-masque-connect-udp/issues/65",
+      "state": "OPEN",
+      "author": "DavidSchinazi",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "[draft-ietf-masque-connect-udp-06 currently uses a URI template to configure clients](https://datatracker.ietf.org/doc/html/draft-ietf-masque-connect-udp-06#section-2). That template contains the `target_host` and `target_port` variables which convey the target host/port in the `:path` pseudo-header. This has the following benefits:\r\n- allows custom schemes\r\n- allows proxy to pick path they use\r\n\r\nHowever it has downsides:\r\n- it requires parsing URI templates which is more of a pain than it seems\r\n- it prevents reusing the same configuration between CONNECT-UDP and CONNECT-IP\r\n\r\nAlternatively, we could replace the configuration URI template with a configuration URL, and instead convey the target host/port in separate HTTP headers. This has the same benefits of the URI template without the downsides.",
+      "createdAt": "2021-11-05T01:11:38Z",
+      "updatedAt": "2021-11-05T01:11:38Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
