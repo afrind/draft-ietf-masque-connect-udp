@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2021-11-07T01:07:38.201231+00:00",
+  "timestamp": "2021-11-09T01:05:29.860832+00:00",
   "repo": "ietf-wg-masque/draft-ietf-masque-connect-udp",
   "labels": [
     {
@@ -2773,6 +2773,61 @@
       "updatedAt": "2021-11-05T01:11:38Z",
       "closedAt": null,
       "comments": []
+    },
+    {
+      "number": 66,
+      "id": "I_kwDOETZKbc4-ZbbK",
+      "title": "SHOULD use HTTP/3 Datagrams",
+      "url": "https://github.com/ietf-wg-masque/draft-ietf-masque-connect-udp/issues/66",
+      "state": "OPEN",
+      "author": "ekr",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": ">    When the protocol running over UDP that is being proxied uses loss\r\n   recovery (e.g., [QUIC]), and the underlying HTTP connection runs over\r\n   TCP, the proxied traffic will incur at least two nested loss recovery\r\n   mechanisms.  This can reduce performance as both can sometimes\r\n   independently retransmit the same data.  To avoid this, HTTP/3\r\n   datagrams SHOULD be used.\r\n\r\nThis text could maybe be clearer. Is it trying to say \"You SHOULD use H3 + Datagram\" or \"You SHOULD use H3 and if you do you should use datagram\". I.e., is it possible to use H3 but not datagram?\r\n",
+      "createdAt": "2021-11-07T21:24:15Z",
+      "updatedAt": "2021-11-08T02:49:39Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "DavidSchinazi",
+          "authorAssociation": "COLLABORATOR",
+          "body": "You're right, this is unclear. That text predates the refactor of HTTP/3 Datagram to HTTP Datagrams, so we should tweak it to say \"To avoid this, UDP proxying SHOULD be performed over HTTP/3 to allow leveraging the QUIC DATAGRAM frame.\"",
+          "createdAt": "2021-11-08T02:49:39Z",
+          "updatedAt": "2021-11-08T02:49:39Z"
+        }
+      ]
+    },
+    {
+      "number": 67,
+      "id": "I_kwDOETZKbc4-ZbgW",
+      "title": "MUST NOT Introspect",
+      "url": "https://github.com/ietf-wg-masque/draft-ietf-masque-connect-udp/issues/67",
+      "state": "OPEN",
+      "author": "ekr",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": ">    Because the CONNECT method creates a TCP connection to the target,\r\n   the target has to indicate its willingness to accept TCP connections\r\n   by responding with a TCP SYN-ACK before the proxy can send it\r\n   application data.  UDP doesn't have this property, so a UDP proxy\r\n   could send more data to an unwilling target than a CONNECT proxy.\r\n   However, in practice denial of service attacks target open TCP ports\r\n   so the TCP SYN-ACK does not offer much protection in real scenarios.\r\n   Proxies MUST NOT introspect the contents of UDP payloads as that\r\n   would lead to ossification of UDP-based protocols by proxies.\r\n\r\nThis seems like an RFC 6919 \"MUST (but we know you won't)\"",
+      "createdAt": "2021-11-07T21:25:52Z",
+      "updatedAt": "2021-11-08T04:01:02Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "DavidSchinazi",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Agreed. Are you proposing a change to the draft?",
+          "createdAt": "2021-11-08T02:50:30Z",
+          "updatedAt": "2021-11-08T02:50:30Z"
+        },
+        {
+          "author": "ekr",
+          "authorAssociation": "NONE",
+          "body": "Yes. I would remove the last sentence. OTOH, given that the status of proxies is still under discussion maybe we just wait on this one.",
+          "createdAt": "2021-11-08T04:01:02Z",
+          "updatedAt": "2021-11-08T04:01:02Z"
+        }
+      ]
     }
   ],
   "pulls": [
