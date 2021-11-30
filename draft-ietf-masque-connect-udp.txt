@@ -4,8 +4,8 @@
 
 MASQUE                                                       D. Schinazi
 Internet-Draft                                                Google LLC
-Intended status: Standards Track                          7 October 2021
-Expires: 10 April 2022
+Intended status: Standards Track                        30 November 2021
+Expires: 3 June 2022
 
 
                      UDP Proxying Support for HTTP
@@ -44,7 +44,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 10 April 2022.
+   This Internet-Draft will expire on 3 June 2022.
 
 Copyright Notice
 
@@ -56,9 +56,9 @@ Copyright Notice
    license-info) in effect on the date of publication of this document.
    Please review these documents carefully, as they describe your rights
    and restrictions with respect to this document.  Code Components
-   extracted from this document must include Simplified BSD License text
-   as described in Section 4.e of the Trust Legal Provisions and are
-   provided without warranty as described in the Simplified BSD License.
+   extracted from this document must include Revised BSD License text as
+   described in Section 4.e of the Trust Legal Provisions and are
+   provided without warranty as described in the Revised BSD License.
 
 Table of Contents
 
@@ -337,12 +337,11 @@ Table of Contents
    unmodified in the "HTTP Datagram Payload" field of an HTTP Datagram.
 
    In order to use HTTP Datagrams, the client will first decide whether
-   or not to use HTTP Datagram Contexts and then register its context ID
-   (or lack thereof) using the corresponding registration capsule, see
-   [HTTP-DGRAM].
+   or not it will attempt to use HTTP Datagram Contexts and then
+   register its context ID (or lack thereof) using the corresponding
+   registration capsule, see [HTTP-DGRAM].
 
-   When sending a REGISTER_DATAGRAM_CONTEXT or
-   REGISTER_DATAGRAM_NO_CONTEXT capsule using the "Datagram Format Type"
+   When sending a registration capsule using the "Datagram Format Type"
    set to UDP_PAYLOAD, the "Datagram Format Additional Data" field SHALL
    be empty.  Servers MUST NOT register contexts using the UDP_PAYLOAD
    HTTP Datagram Format Type.  Clients MUST NOT register more than one
@@ -479,7 +478,7 @@ Table of Contents
    [EXT-CONNECT2]
               McManus, P., "Bootstrapping WebSockets with HTTP/2",
               RFC 8441, DOI 10.17487/RFC8441, September 2018,
-              <https://datatracker.ietf.org/doc/html/rfc8441>.
+              <https://www.rfc-editor.org/rfc/rfc8441>.
 
    [EXT-CONNECT3]
               Hamilton, R., "Bootstrapping WebSockets with HTTP/3", Work
@@ -491,7 +490,7 @@ Table of Contents
    [H2]       Belshe, M., Peon, R., and M. Thomson, Ed., "Hypertext
               Transfer Protocol Version 2 (HTTP/2)", RFC 7540,
               DOI 10.17487/RFC7540, May 2015,
-              <https://datatracker.ietf.org/doc/html/rfc7540>.
+              <https://www.rfc-editor.org/rfc/rfc7540>.
 
    [H3]       Bishop, M., "Hypertext Transfer Protocol Version 3
               (HTTP/3)", Work in Progress, Internet-Draft, draft-ietf-
@@ -502,9 +501,9 @@ Table of Contents
    [HTTP-DGRAM]
               Schinazi, D. and L. Pardue, "Using Datagrams with HTTP",
               Work in Progress, Internet-Draft, draft-ietf-masque-h3-
-              datagram-04, 6 October 2021,
+              datagram-05, 25 October 2021,
               <https://datatracker.ietf.org/doc/html/draft-ietf-masque-
-              h3-datagram-04>.
+              h3-datagram-05>.
 
    [MESSAGING]
               Fielding, R. T., Nottingham, M., and J. Reschke,
@@ -516,16 +515,16 @@ Table of Contents
    [QUIC]     Iyengar, J., Ed. and M. Thomson, Ed., "QUIC: A UDP-Based
               Multiplexed and Secure Transport", RFC 9000,
               DOI 10.17487/RFC9000, May 2021,
-              <https://datatracker.ietf.org/doc/html/rfc9000>.
+              <https://www.rfc-editor.org/rfc/rfc9000>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
               DOI 10.17487/RFC2119, March 1997,
-              <https://datatracker.ietf.org/doc/html/rfc2119>.
+              <https://www.rfc-editor.org/rfc/rfc2119>.
 
    [RFC8174]  Leiba, B., "Ambiguity of Uppercase vs Lowercase in RFC
               2119 Key Words", BCP 14, RFC 8174, DOI 10.17487/RFC8174,
-              May 2017, <https://datatracker.ietf.org/doc/html/rfc8174>.
+              May 2017, <https://www.rfc-editor.org/rfc/rfc8174>.
 
    [SEMANTICS]
               Fielding, R. T., Nottingham, M., and J. Reschke, "HTTP
@@ -536,46 +535,45 @@ Table of Contents
 
    [TCP]      Postel, J., "Transmission Control Protocol", STD 7,
               RFC 793, DOI 10.17487/RFC0793, September 1981,
-              <https://datatracker.ietf.org/doc/html/rfc793>.
+              <https://www.rfc-editor.org/rfc/rfc793>.
 
    [TEMPLATE] Gregorio, J., Fielding, R., Hadley, M., Nottingham, M.,
               and D. Orchard, "URI Template", RFC 6570,
               DOI 10.17487/RFC6570, March 2012,
-              <https://datatracker.ietf.org/doc/html/rfc6570>.
+              <https://www.rfc-editor.org/rfc/rfc6570>.
 
    [UDP]      Postel, J., "User Datagram Protocol", STD 6, RFC 768,
               DOI 10.17487/RFC0768, August 1980,
-              <https://datatracker.ietf.org/doc/html/rfc768>.
+              <https://www.rfc-editor.org/rfc/rfc768>.
 
 8.2.  Informative References
 
    [BEHAVE]   Audet, F., Ed. and C. Jennings, "Network Address
               Translation (NAT) Behavioral Requirements for Unicast
               UDP", BCP 127, RFC 4787, DOI 10.17487/RFC4787, January
-              2007, <https://datatracker.ietf.org/doc/html/rfc4787>.
+              2007, <https://www.rfc-editor.org/rfc/rfc4787>.
 
    [PROXY-STATUS]
               Nottingham, M. and P. Sikora, "The Proxy-Status HTTP
               Response Header Field", Work in Progress, Internet-Draft,
-              draft-ietf-httpbis-proxy-status-06, 16 August 2021,
+              draft-ietf-httpbis-proxy-status-08, 13 October 2021,
               <https://datatracker.ietf.org/doc/html/draft-ietf-httpbis-
-              proxy-status-06>.
+              proxy-status-08>.
 
    [RFC4443]  Conta, A., Deering, S., and M. Gupta, Ed., "Internet
               Control Message Protocol (ICMPv6) for the Internet
               Protocol Version 6 (IPv6) Specification", STD 89,
               RFC 4443, DOI 10.17487/RFC4443, March 2006,
-              <https://datatracker.ietf.org/doc/html/rfc4443>.
+              <https://www.rfc-editor.org/rfc/rfc4443>.
 
    [RFC6040]  Briscoe, B., "Tunnelling of Explicit Congestion
               Notification", RFC 6040, DOI 10.17487/RFC6040, November
-              2010, <https://datatracker.ietf.org/doc/html/rfc6040>.
+              2010, <https://www.rfc-editor.org/rfc/rfc6040>.
 
    [RFC8899]  Fairhurst, G., Jones, T., Tüxen, M., Rüngeler, I., and T.
               Völker, "Packetization Layer Path MTU Discovery for
               Datagram Transports", RFC 8899, DOI 10.17487/RFC8899,
-              September 2020,
-              <https://datatracker.ietf.org/doc/html/rfc8899>.
+              September 2020, <https://www.rfc-editor.org/rfc/rfc8899>.
 
 Acknowledgments
 
