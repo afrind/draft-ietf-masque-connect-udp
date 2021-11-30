@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2021-11-09T01:05:29.860832+00:00",
+  "timestamp": "2021-11-30T01:05:46.714617+00:00",
   "repo": "ietf-wg-masque/draft-ietf-masque-connect-udp",
   "labels": [
     {
@@ -2826,6 +2826,82 @@
           "body": "Yes. I would remove the last sentence. OTOH, given that the status of proxies is still under discussion maybe we just wait on this one.",
           "createdAt": "2021-11-08T04:01:02Z",
           "updatedAt": "2021-11-08T04:01:02Z"
+        }
+      ]
+    },
+    {
+      "number": 68,
+      "id": "I_kwDOETZKbc4_kaDu",
+      "title": "Add to security considerations that it's not possible to generate CONNECT from JS",
+      "url": "https://github.com/ietf-wg-masque/draft-ietf-masque-connect-udp/issues/68",
+      "state": "OPEN",
+      "author": "ekr",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "And point to https://fetch.spec.whatwg.org/#methods\r\n\r\nThis is an important part of the security analysis.",
+      "createdAt": "2021-11-29T21:11:59Z",
+      "updatedAt": "2021-11-30T00:15:07Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "martinthomson",
+          "authorAssociation": "NONE",
+          "body": "Only if you believe that the Sec- prefix is useful for the Capsule-Protocol header field.  I don't.",
+          "createdAt": "2021-11-29T21:18:51Z",
+          "updatedAt": "2021-11-29T21:18:51Z"
+        },
+        {
+          "author": "ekr",
+          "authorAssociation": "NONE",
+          "body": "Sorry, I don't mean that it's the only thing that makes it work, merely that if were going to talk about how to analyze it, this is something we should say.",
+          "createdAt": "2021-11-29T21:30:43Z",
+          "updatedAt": "2021-11-29T21:30:43Z"
+        },
+        {
+          "author": "DavidSchinazi",
+          "authorAssociation": "COLLABORATOR",
+          "body": "@ekr can you clarify your intent? Your issue title starts with \"Add to JS\" but I suspect you didn't mean that we should modify the JavaScript specification. Would a note next to where the \"Capsule-Protocol\" header is defined resolve this?",
+          "createdAt": "2021-11-29T23:51:29Z",
+          "updatedAt": "2021-11-29T23:51:29Z"
+        },
+        {
+          "author": "ekr",
+          "authorAssociation": "NONE",
+          "body": "Aaargh. I meant \"add to the security considerations\". ",
+          "createdAt": "2021-11-29T23:54:41Z",
+          "updatedAt": "2021-11-29T23:54:41Z"
+        },
+        {
+          "author": "DavidSchinazi",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Thanks, that makes more sense :) Adding something to security considerations sounds good to me, I'll add text to the [PR](https://github.com/ietf-wg-masque/draft-ietf-masque-h3-datagram/pull/124).\r\n\r\nNote that this was filed on the wrong repository, [draft-ietf-masque-h3-datagram](https://github.com/ietf-wg-masque/draft-ietf-masque-h3-datagram/issues) is the droid you're looking for.",
+          "createdAt": "2021-11-30T00:15:07Z",
+          "updatedAt": "2021-11-30T00:15:07Z"
+        }
+      ]
+    },
+    {
+      "number": 69,
+      "id": "I_kwDOETZKbc4_kfCW",
+      "title": "Conditions on datagram forwarding",
+      "url": "https://github.com/ietf-wg-masque/draft-ietf-masque-connect-udp/issues/69",
+      "state": "OPEN",
+      "author": "martinthomson",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "> An intermediary that understands the request semantics enough to know that capsules are in use MAY convert between QUIC DATAGRAM frames and DATAGRAM capsules\r\n\r\nI think that this is right, but we should be more precise about what this means.\r\n\r\nThat is, if the method is CONNECT and either:\r\n\r\n1. the intermediary understands the :protocol selection, or\r\n2. the request includes Capsule-Protocol\r\n\r\nThen the intermediary can forward DATAGRAM capsules as QUIC DATAGRAM frames or forward QUIC DATAGRAM frames as DATAGRAM capsules.\r\n\r\nThose conditions could be spelled out more clearly.",
+      "createdAt": "2021-11-29T21:36:57Z",
+      "updatedAt": "2021-11-29T23:56:01Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "DavidSchinazi",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I agree. I'll add this to the [PR](https://github.com/ietf-wg-masque/draft-ietf-masque-h3-datagram/pull/124).\r\n\r\nNote that this was filed on the wrong repository, [draft-ietf-masque-h3-datagram](https://github.com/ietf-wg-masque/draft-ietf-masque-h3-datagram/issues) is the droid you're looking for.",
+          "createdAt": "2021-11-29T23:56:01Z",
+          "updatedAt": "2021-11-29T23:56:01Z"
         }
       ]
     }
