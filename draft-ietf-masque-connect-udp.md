@@ -276,25 +276,46 @@ the client (e.g., "connect-udp-version: 2"). Sending this header is RECOMMENDED
 but not required.
 
 
-# Encoding of Proxied UDP Packets {#datagram-encoding}
+# Datagram Type
 
-UDP packets are encoded using HTTP Datagrams {{HTTP-DGRAM}} with the
-UDP_PAYLOAD HTTP Datagram Format Type (see value in {{iana-format-type}}). When
-using the UDP_PAYLOAD HTTP Datagram Format Type, the payload of a UDP packet
-(referred to as "data octets" in {{UDP}}) is sent unmodified in the "HTTP
-Datagram Payload" field of an HTTP Datagram.
+This protocol allows future extensions to exchange HTTP Datagrams which carry
+different semantics from UDP payloads. Some of these extensions can augment UDP
+payloads with additional data, while others can exchange data that is completely
+separate from UDP payloads. In order to accomplish this, all HTTP Datagrams
+associated with UDP Proxying request streams start with a datagram type, see
+{{format}}.
 
-In order to use HTTP Datagrams, the client will first decide whether or not it
-will attempt to use HTTP Datagram Contexts and then register its context ID (or
-lack thereof) using the corresponding registration capsule, see {{HTTP-DGRAM}}.
+The datagram type value of zero is reserved for UDP payloads, while non-zero
+values are defined by extensions.
 
-When sending a registration capsule using the "Datagram Format Type" set to
-UDP_PAYLOAD, the "Datagram Format Additional Data" field SHALL be empty.
-Servers MUST NOT register contexts using the UDP_PAYLOAD HTTP Datagram Format
-Type. Clients MUST NOT register more than one context using the UDP_PAYLOAD
-HTTP Datagram Format Type. Endpoints MUST NOT close contexts using the
-UDP_PAYLOAD HTTP Datagram Format Type. If an endpoint detects a violation of
-any of these requirements, it MUST abort the stream.
+
+# HTTP Datagram Payload Format {#format}
+
+When associated with UDP proxying request streams, the HTTP Datagram Payload
+field of HTTP Datagrams (see {{HTTP-DGRAM}}) carries the following semantics:
+
+~~~
+UDP Proxying HTTP Datagram Payload {
+  Datagram Type (i),
+  Context Payload (..),
+}
+~~~
+{: #dgram-fromat title="UDP Proxying HTTP Datagram Format"}
+
+Datagram Type:
+
+: A variable-length integer that contains the value of the datagram
+type. Endpoints MUST silently drop any received HTTP Datagram which carries an
+unknown Datagram Type.
+
+Context Payload:
+
+: The payload of the datagram, whose semantics depend on value of the Datagram
+Type. Note that this field can be empty.
+
+UDP packets are encoded using HTTP Datagrams with the Datagram Type set to zero.
+When the Datagram Type is set to zero, the Context Payload field contains the
+unmodified payload of a UDP packet (referred to as "data octets" in {{UDP}}).
 
 Clients MAY optimistically start sending proxied UDP packets before receiving
 the response to its UDP proxying request, noting however that those may not be
@@ -385,6 +406,18 @@ ossification of UDP-based protocols by proxies.
 This document will request IANA to register "connect-udp" in the
 HTTP Upgrade Token Registry maintained at
 <[](https://www.iana.org/assignments/http-upgrade-tokens)>.
+
+
+## CONNECT-UDP Datagram Types {#iana-setting}
+
+This document will request IANA to register the following entry in the
+"CONNECT-UDP Datagram Types" registry:
+
+| Type         |   Value  | Specification |
+|:-------------|:---------|:--------------|
+| UDP Payload  | 0        | This Document |
+{: #iana-type-table title="Datagram Types"}
+
 
 Value:
 
